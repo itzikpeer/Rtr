@@ -7,215 +7,259 @@
 <meta name="description" content="סדנת תיאטרון ואילתור לנשים בהנחיית אלינור פור שלום – פתח תקווה 24.11 · ירושלים 17.12">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playpen+Sans+Hebrew:wght@600;800&family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gveret+Levin&family=Karantina:wght@400;700&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink-900: #12072a;
-    --ink-800: #1c0c3d;
-    --ink-700: #2a1258;
-    --plum: #4a2290;
-    --lav-300: #cdb8f5;
-    --lav-200: #e4d8fb;
-    --paper: #f7f2ff;
-    --gold-1: #fff0b3;
-    --gold-2: #f6cf63;
-    --gold-3: #d99a2b;
+    --night: #0e0420;
+    --velvet-1: #1d0940;
+    --velvet-2: #34116e;
+    --velvet-3: #5a23a8;
+    --lav: #d9c8ff;
+    --cream: #fff6e0;
+    --gold-1: #fff3c4;
+    --gold-2: #f7cf5d;
+    --gold-3: #d6952a;
+    --gold-4: #a8691a;
     --wa: #25d366;
-    --gold: linear-gradient(100deg, var(--gold-3) 0%, var(--gold-2) 30%, var(--gold-1) 50%, var(--gold-2) 70%, var(--gold-3) 100%);
+    --gold: linear-gradient(100deg, var(--gold-3) 0%, var(--gold-2) 28%, var(--gold-1) 50%, var(--gold-2) 72%, var(--gold-3) 100%);
+    --hand: "Gveret Levin", cursive;
+    --poster: "Karantina", "Fredoka", sans-serif;
+    --text: "Fredoka", system-ui, sans-serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: #0b0418; }
-  body {
-    font-family: "Rubik", system-ui, sans-serif;
-    color: var(--paper);
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    padding: 16px;
-  }
+  html, body { background: #07020f; }
+  body { font-family: var(--text); color: var(--cream); min-height: 100vh; display: grid; place-items: center; padding: 16px; }
   a { color: inherit; text-decoration: none; }
 
-  /* The poster is drawn on a 1080×1350 grid; 1u = 1px at full size. */
+  /* Poster is drawn on a 1080×1350 grid; 1u = 1px at full size. */
   .stage { width: min(100%, 1080px); container-type: inline-size; }
   .poster {
     --u: calc(100cqw / 1080);
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1080 / 1350;
+    position: relative; isolation: isolate;
+    width: 100%; aspect-ratio: 1080 / 1350;
     display: flex; flex-direction: column;
     border-radius: calc(28 * var(--u));
+    overflow: hidden;
     background:
-      radial-gradient(calc(700 * var(--u)) calc(500 * var(--u)) at 85% 62%, rgba(122, 64, 214, .35), transparent 70%),
-      radial-gradient(calc(600 * var(--u)) calc(420 * var(--u)) at 10% 88%, rgba(217, 154, 43, .12), transparent 70%),
-      linear-gradient(180deg, var(--ink-700) 0%, var(--ink-800) 45%, var(--ink-900) 100%);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, .5);
+      radial-gradient(calc(760 * var(--u)) calc(420 * var(--u)) at 50% 47%, rgba(122, 60, 230, .55), transparent 70%),
+      radial-gradient(calc(900 * var(--u)) calc(700 * var(--u)) at 50% 100%, rgba(90, 35, 168, .55), transparent 70%),
+      linear-gradient(180deg, var(--velvet-1) 0%, var(--velvet-2) 42%, var(--velvet-1) 72%, var(--night) 100%);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, .6);
   }
-  .export .poster, .export .foot { border-radius: 0; box-shadow: none; }
   .export body { padding: 0; }
+  .export .poster { border-radius: 0; box-shadow: none; }
 
-  /* ---------- HERO ---------- */
-  .hero { position: absolute; inset: 0 0 auto 0; height: calc(456 * var(--u)); overflow: hidden; border-radius: calc(28 * var(--u)) calc(28 * var(--u)) 0 0; }
-  .export .hero { border-radius: 0; }
-  .hero img {
-    width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block;
-    -webkit-mask-image: linear-gradient(180deg, #000 50%, transparent 100%); mask-image: linear-gradient(180deg, #000 50%, transparent 100%);
+  /* ---------- STAGE DRESSING ---------- */
+  .curtain {
+    position: absolute; top: 0; bottom: 0; width: calc(110 * var(--u)); z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, .55), transparent 40%, rgba(0, 0, 0, .35)),
+      repeating-linear-gradient(90deg, #2a0c5c 0, #5b25a6 calc(14 * var(--u)), #3a1279 calc(24 * var(--u)), #1a063b calc(36 * var(--u)));
+    box-shadow: 0 0 calc(40 * var(--u)) rgba(0, 0, 0, .6);
   }
-  .hero::after {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(42, 18, 88, 0) 40%, rgba(42, 18, 88, .55) 75%, rgba(42, 18, 88, 0) 100%);
+  .curtain.r { right: 0; border-bottom-left-radius: 100% calc(260 * var(--u)); transform-origin: top right; }
+  .curtain.l { left: 0; transform: scaleX(-1); border-bottom-left-radius: 100% calc(260 * var(--u)); transform-origin: top left; }
+  .curtain.l { left: calc(110 * var(--u)); }
+  .curtain::after {
+    content: ""; position: absolute; inset: 0 0 auto auto; width: calc(10 * var(--u)); height: 100%;
+    background: linear-gradient(180deg, var(--gold-2), var(--gold-4));
+    opacity: .8;
   }
-  .bsd { position: absolute; top: calc(22 * var(--u)); right: calc(30 * var(--u)); font-size: calc(22 * var(--u)); font-weight: 500; color: var(--gold-3); z-index: 3; }
+  .valance {
+    position: absolute; inset: 0 0 auto 0; height: calc(46 * var(--u)); z-index: 2; pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 0, transparent calc(30 * var(--u)), transparent 0) ,
+      linear-gradient(180deg, #4a1a92, #22094a);
+    -webkit-mask: radial-gradient(calc(36 * var(--u)) calc(24 * var(--u)) at 50% 100%, transparent 98%, #000) 0 0 / calc(72 * var(--u)) 100%;
+            mask: radial-gradient(calc(36 * var(--u)) calc(24 * var(--u)) at 50% 100%, transparent 98%, #000) 0 0 / calc(72 * var(--u)) 100%;
+    box-shadow: 0 calc(6 * var(--u)) calc(20 * var(--u)) rgba(0, 0, 0, .5);
+  }
+  .valance::after { content: ""; position: absolute; inset: auto 0 calc(18 * var(--u)) 0; height: calc(4 * var(--u)); background: var(--gold); opacity: .9; }
 
-  .sticker {
-    position: absolute; z-index: 3;
-    top: calc(18 * var(--u)); left: calc(22 * var(--u));
-    width: calc(176 * var(--u)); height: calc(176 * var(--u));
-    border-radius: 50%;
-    display: grid; place-items: center; text-align: center;
-    background: var(--gold);
-    color: var(--ink-800);
-    font-weight: 900; font-size: calc(27 * var(--u)); line-height: 1.12;
-    transform: rotate(-10deg);
-    box-shadow: 0 calc(10 * var(--u)) calc(30 * var(--u)) rgba(18, 7, 42, .35), inset 0 0 0 calc(5 * var(--u)) rgba(255, 255, 255, .35);
+  .beam {
+    position: absolute; z-index: 1; pointer-events: none;
+    top: calc(-40 * var(--u)); left: 50%; width: calc(980 * var(--u)); height: calc(760 * var(--u));
+    transform: translateX(-50%);
+    clip-path: polygon(41% 0, 59% 0, 100% 100%, 0 100%);
+    background: linear-gradient(180deg, rgba(255, 240, 200, .42), rgba(255, 225, 160, .14) 60%, rgba(255, 220, 150, 0));
+    filter: blur(calc(14 * var(--u)));
+    mix-blend-mode: screen;
+    animation: sway 9s ease-in-out infinite;
   }
-  .sticker small { display: block; font-size: calc(19 * var(--u)); font-weight: 800; }
-  .sticker b { display: block; font-size: calc(72 * var(--u)); font-weight: 900; line-height: .95; letter-spacing: calc(-2 * var(--u)); }
-  .sticker b em { font-style: normal; font-size: .5em; margin-inline-start: calc(2 * var(--u)); }
-  .sticker s { display: block; font-size: calc(19 * var(--u)); font-weight: 700; opacity: .75; text-decoration-thickness: calc(2 * var(--u)); }
+  @keyframes sway { 50% { transform: translateX(-50%) rotate(1.6deg); } }
+  .floor {
+    position: absolute; z-index: 1; left: 50%; top: calc(560 * var(--u)); transform: translateX(-50%);
+    width: calc(1000 * var(--u)); height: calc(150 * var(--u)); border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(255, 228, 170, .38), rgba(255, 210, 140, .1) 60%, transparent);
+    pointer-events: none;
+  }
+  .confetti { position: absolute; inset: 0; z-index: 2; pointer-events: none; width: 100%; height: 100%; }
+  .confetti .bit { animation: twinkle 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes twinkle { 50% { opacity: .35; transform: rotate(25deg) scale(.85); } }
 
-  .bubble {
-    position: absolute; z-index: 3;
-    top: calc(26 * var(--u)); right: calc(440 * var(--u));
-    width: calc(330 * var(--u));
-    padding: calc(16 * var(--u)) calc(22 * var(--u));
-    background: rgba(255, 255, 255, .94);
-    color: var(--ink-800);
-    border-radius: calc(26 * var(--u)) calc(26 * var(--u)) calc(6 * var(--u)) calc(26 * var(--u));
-    box-shadow: 0 calc(10 * var(--u)) calc(30 * var(--u)) rgba(18, 7, 42, .25);
-    transform: rotate(2deg);
-  }
-  .bubble p { font-weight: 800; font-size: calc(25 * var(--u)); line-height: 1.25; }
-  .bubble span { display: block; margin-top: calc(6 * var(--u)); font-size: calc(17 * var(--u)); font-weight: 500; color: var(--plum); }
-  .bubble::after {
-    content: ""; position: absolute; bottom: calc(-16 * var(--u)); right: calc(36 * var(--u));
-    border: calc(10 * var(--u)) solid transparent; border-top: calc(14 * var(--u)) solid rgba(255, 255, 255, .94); border-right-width: 0;
-  }
+  .bsd { position: absolute; z-index: 6; top: calc(58 * var(--u)); right: calc(132 * var(--u)); font-size: calc(20 * var(--u)); color: var(--gold-2); opacity: .9; }
 
-  /* ---------- BODY ---------- */
-  .body { position: relative; flex: 1; padding: calc(366 * var(--u)) calc(56 * var(--u)) calc(18 * var(--u)); display: flex; flex-direction: column; align-items: center; text-align: center; z-index: 2; }
-
-  .brand {
-    font-family: "Playpen Sans Hebrew", "Rubik", sans-serif;
-    font-weight: 800;
-    font-size: calc(148 * var(--u));
-    line-height: 1;
-    background: var(--gold);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    filter: drop-shadow(0 calc(6 * var(--u)) calc(14 * var(--u)) rgba(18, 7, 42, .55));
-    letter-spacing: calc(-2 * var(--u));
-  }
+  /* ---------- TITLE + WOMEN ---------- */
   .eyebrow {
-    margin-top: calc(10 * var(--u));
-    display: inline-flex; align-items: center; gap: calc(14 * var(--u));
-    font-size: calc(26 * var(--u)); font-weight: 500; color: var(--lav-200); letter-spacing: calc(.5 * var(--u));
+    position: absolute; z-index: 4; top: calc(78 * var(--u)); left: 0; right: 0; text-align: center;
+    font-family: var(--poster); font-weight: 700; font-size: calc(40 * var(--u)); letter-spacing: calc(3 * var(--u));
+    color: var(--lav);
   }
-  .eyebrow i { width: calc(8 * var(--u)); height: calc(8 * var(--u)); border-radius: 50%; background: var(--gold-2); display: inline-block; }
+  .eyebrow b { color: var(--gold-2); font-weight: 700; }
+  .brand {
+    position: absolute; z-index: 3; top: calc(112 * var(--u)); left: 0; right: 0; text-align: center;
+    font-family: var(--hand); font-weight: 400;
+    font-size: calc(205 * var(--u)); line-height: 1; white-space: nowrap;
+    background: var(--gold); -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 calc(4 * var(--u)) 0 var(--gold-4)) drop-shadow(0 calc(16 * var(--u)) calc(26 * var(--u)) rgba(10, 2, 30, .7));
+    transform: rotate(-3deg);
+  }
+  .women {
+    position: absolute; z-index: 4; left: 50%; top: calc(262 * var(--u));
+    width: calc(1120 * var(--u)); transform: translateX(-50%);
+    -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%); mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+    filter: drop-shadow(0 0 calc(18 * var(--u)) rgba(255, 220, 160, .25));
+  }
+  .women img { width: 100%; display: block; }
 
-  .headline { margin-top: calc(18 * var(--u)); font-weight: 900; font-size: calc(54 * var(--u)); line-height: 1.12; letter-spacing: calc(-.5 * var(--u)); }
-  .headline .soft { color: var(--lav-300); font-weight: 700; }
-  .headline .pop { position: relative; white-space: nowrap; }
-  .headline .pop::after {
-    content: ""; position: absolute; inset: auto -2% calc(-4 * var(--u)) -2%; height: calc(12 * var(--u));
-    background: var(--gold); border-radius: 99px; opacity: .9; z-index: -1;
-    transform: rotate(-1deg);
+  .note {
+    position: absolute; z-index: 6; font-family: var(--hand); color: var(--gold-1); line-height: .95; text-align: center;
+    text-shadow: 0 calc(3 * var(--u)) calc(10 * var(--u)) rgba(10, 2, 30, .8);
   }
-  .sub { margin-top: calc(14 * var(--u)); font-size: calc(27 * var(--u)); line-height: 1.45; color: var(--lav-200); max-width: calc(880 * var(--u)); }
-  .sub b { color: #fff; font-weight: 700; }
+  .note.you { top: calc(486 * var(--u)); left: calc(128 * var(--u)); font-size: calc(44 * var(--u)); transform: rotate(-7deg); }
+  .note svg { position: absolute; overflow: visible; fill: none; stroke: var(--gold-2); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .note.you svg { width: calc(80 * var(--u)); height: calc(70 * var(--u)); right: calc(-74 * var(--u)); top: calc(-34 * var(--u)); }
 
-  /* host + promises */
-  .host {
-    margin-top: calc(22 * var(--u));
-    width: 100%;
-    display: flex; align-items: center; gap: calc(24 * var(--u));
-    padding: calc(18 * var(--u)) calc(24 * var(--u));
-    border-radius: calc(26 * var(--u));
-    background: linear-gradient(90deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02));
-    border: calc(1.5 * var(--u)) solid rgba(205, 184, 245, .22);
-    text-align: right;
+  .quote {
+    position: absolute; z-index: 6; top: calc(468 * var(--u)); right: calc(124 * var(--u));
+    width: calc(232 * var(--u)); padding: calc(14 * var(--u)) calc(18 * var(--u));
+    background: var(--cream); color: var(--velvet-1);
+    border-radius: calc(22 * var(--u));
+    transform: rotate(4deg);
+    box-shadow: calc(6 * var(--u)) calc(8 * var(--u)) 0 var(--gold-3), 0 calc(14 * var(--u)) calc(30 * var(--u)) rgba(0, 0, 0, .45);
   }
-  .host img {
-    width: calc(112 * var(--u)); height: calc(112 * var(--u)); border-radius: 50%; object-fit: cover; flex: none;
-    box-shadow: 0 0 0 calc(4 * var(--u)) var(--ink-800), 0 0 0 calc(7 * var(--u)) var(--gold-2);
+  .quote p { font-weight: 600; font-size: calc(22 * var(--u)); line-height: 1.22; }
+  .quote span { display: block; margin-top: calc(6 * var(--u)); font-size: calc(16 * var(--u)); color: var(--velvet-3); font-weight: 500; }
+  .quote::after {
+    content: ""; position: absolute; top: calc(-18 * var(--u)); right: calc(40 * var(--u));
+    border-left: calc(4 * var(--u)) solid transparent; border-right: calc(22 * var(--u)) solid transparent; border-bottom: calc(20 * var(--u)) solid var(--cream);
   }
-  .host .who { flex: 1; }
-  .host .who small { font-size: calc(19 * var(--u)); color: var(--lav-300); }
-  .host .who strong { display: block; font-size: calc(36 * var(--u)); font-weight: 800; line-height: 1.15; }
-  .host .who span { display: block; font-size: calc(21 * var(--u)); color: var(--lav-200); margin-top: calc(4 * var(--u)); }
-  .promises { list-style: none; display: grid; gap: calc(8 * var(--u)); flex: none; }
-  .promises li { display: flex; align-items: center; gap: calc(10 * var(--u)); font-size: calc(21 * var(--u)); font-weight: 500; white-space: nowrap; }
-  .promises svg { width: calc(26 * var(--u)); height: calc(26 * var(--u)); flex: none; }
 
-  /* dates */
-  .pick { margin-top: calc(20 * var(--u)); display: inline-flex; align-items: center; gap: calc(12 * var(--u)); font-size: calc(24 * var(--u)); font-weight: 700; color: var(--gold-2); }
-  .pick i { width: calc(12 * var(--u)); height: calc(12 * var(--u)); border-radius: 50%; background: var(--gold-2); box-shadow: 0 0 0 calc(5 * var(--u)) rgba(246, 207, 99, .25); animation: pulse 1.6s ease-in-out infinite; }
-  @keyframes pulse { 50% { box-shadow: 0 0 0 calc(10 * var(--u)) rgba(246, 207, 99, 0); } }
-  .export .pick i { animation: none; }
-  .dates { margin-top: calc(14 * var(--u)); width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: calc(22 * var(--u)); }
-  .date {
-    position: relative;
-    display: flex; flex-direction: column; align-items: center;
-    padding: calc(18 * var(--u)) calc(18 * var(--u)) calc(16 * var(--u));
-    border-radius: calc(26 * var(--u));
-    background: rgba(18, 7, 42, .55);
-    border: calc(2 * var(--u)) solid rgba(246, 207, 99, .45);
-    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+  /* ---------- HOOK ---------- */
+  .content { position: relative; z-index: 5; flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: calc(600 * var(--u)) calc(130 * var(--u)) 0; }
+  .hook { position: relative; display: flex; align-items: center; justify-content: center; gap: calc(26 * var(--u)); }
+  .hook .critic { position: relative; font-family: var(--poster); font-weight: 700; font-size: calc(132 * var(--u)); line-height: .9; color: #fff; letter-spacing: calc(1 * var(--u)); }
+  .hook .critic svg { position: absolute; left: -6%; top: 22%; width: 112%; height: 60%; overflow: visible; }
+  .hook .critic path { fill: none; stroke: var(--gold-2); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: draw 1s .5s cubic-bezier(.6, 0, .2, 1) forwards; filter: drop-shadow(0 3px 0 rgba(10, 2, 30, .6)); }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .hook .answer {
+    font-family: var(--hand); font-size: calc(118 * var(--u)); line-height: 1;
+    background: var(--gold); -webkit-background-clip: text; background-clip: text; color: transparent;
+    transform: rotate(-8deg) scale(0); transform-origin: center;
+    animation: pop .55s 1.35s cubic-bezier(.3, 1.6, .5, 1) forwards;
+    filter: drop-shadow(0 calc(4 * var(--u)) 0 var(--gold-4));
   }
-  .date:hover, .date:focus-visible { transform: translateY(-3px); border-color: var(--gold-2); background: rgba(74, 34, 144, .35); outline: none; }
-  .date .city { display: flex; align-items: center; gap: calc(8 * var(--u)); font-size: calc(24 * var(--u)); font-weight: 700; color: var(--lav-300); }
-  .date .city svg { width: calc(22 * var(--u)); height: calc(22 * var(--u)); }
-  .date .when { font-size: calc(46 * var(--u)); font-weight: 900; line-height: 1.15; margin-top: calc(2 * var(--u)); }
-  .date .time { font-size: calc(24 * var(--u)); color: var(--lav-200); direction: ltr; }
-  .date .go {
-    margin-top: calc(12 * var(--u));
-    display: inline-flex; align-items: center; gap: calc(10 * var(--u));
-    padding: calc(9 * var(--u)) calc(24 * var(--u));
-    border-radius: 99px;
-    background: var(--wa); color: #06331a;
-    font-size: calc(22 * var(--u)); font-weight: 800;
-  }
-  .date .go svg { width: calc(24 * var(--u)); height: calc(24 * var(--u)); }
+  @keyframes pop { to { transform: rotate(-8deg) scale(1); } }
+  .export .hook .critic path { animation: none; stroke-dashoffset: 0; }
+  .export .hook .answer { animation: none; transform: rotate(-8deg); }
 
-  /* footer */
+  .sub { margin-top: calc(10 * var(--u)); font-size: calc(27 * var(--u)); line-height: 1.38; color: var(--lav); font-weight: 400; }
+  .sub b { color: #fff; font-weight: 600; }
+  .nots { margin-top: calc(14 * var(--u)); display: flex; gap: calc(12 * var(--u)); list-style: none; }
+  .nots li {
+    font-size: calc(21 * var(--u)); font-weight: 600; padding: calc(6 * var(--u)) calc(16 * var(--u));
+    border-radius: 99px; border: calc(1.5 * var(--u)) dashed rgba(247, 207, 93, .7); color: var(--gold-1);
+  }
+
+  /* ---------- DIRECTOR CREDIT ---------- */
+  .credit { margin-top: calc(18 * var(--u)); display: flex; align-items: center; gap: calc(20 * var(--u)); }
+  .credit img {
+    width: calc(96 * var(--u)); height: calc(96 * var(--u)); border-radius: 50%; object-fit: cover;
+    box-shadow: 0 0 0 calc(4 * var(--u)) var(--velvet-1), 0 0 0 calc(7 * var(--u)) var(--gold-2), 0 calc(10 * var(--u)) calc(24 * var(--u)) rgba(0, 0, 0, .5);
+  }
+  .credit div { text-align: right; }
+  .credit small { display: block; font-family: var(--poster); font-size: calc(28 * var(--u)); letter-spacing: calc(3 * var(--u)); color: var(--gold-2); line-height: 1; }
+  .credit strong { display: block; font-family: var(--poster); font-weight: 700; font-size: calc(64 * var(--u)); line-height: .95; color: #fff; }
+  .credit span { display: block; font-size: calc(20 * var(--u)); color: var(--lav); }
+
+  /* ---------- TICKETS ---------- */
+  .tickets { margin-top: calc(56 * var(--u)); width: calc(900 * var(--u)); display: grid; grid-template-columns: 1fr 1fr; gap: calc(34 * var(--u)); }
+  .ticket {
+    --notch: calc(16 * var(--u));
+    position: relative; display: flex; color: var(--velvet-1);
+    height: calc(178 * var(--u));
+    background: linear-gradient(135deg, var(--gold-1), var(--gold-2) 55%, #f0b84a);
+    border-radius: calc(14 * var(--u));
+    -webkit-mask:
+      radial-gradient(circle var(--notch) at calc(100% - 0px) 50%, transparent 98%, #000) right / 51% 100% no-repeat,
+      radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat;
+            mask:
+      radial-gradient(circle var(--notch) at calc(100% - 0px) 50%, transparent 98%, #000) right / 51% 100% no-repeat,
+      radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat;
+    transition: transform .25s cubic-bezier(.3, 1.4, .5, 1);
+    filter: drop-shadow(0 calc(12 * var(--u)) calc(16 * var(--u)) rgba(0, 0, 0, .45));
+  }
+  .ticket:nth-child(1) { transform: rotate(2.5deg); }
+  .ticket:nth-child(2) { transform: rotate(-2.5deg); }
+  .ticket:hover, .ticket:focus-visible { transform: rotate(0) scale(1.04); outline: none; }
+  .ticket .main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: calc(10 * var(--u)) calc(14 * var(--u)); }
+  .ticket .city { font-size: calc(22 * var(--u)); font-weight: 600; letter-spacing: calc(.5 * var(--u)); opacity: .85; }
+  .ticket .when { font-family: var(--poster); font-weight: 700; font-size: calc(66 * var(--u)); line-height: .95; }
+  .ticket .time { font-size: calc(21 * var(--u)); font-weight: 500; direction: ltr; }
+  .ticket .go { margin-top: calc(8 * var(--u)); display: inline-flex; align-items: center; gap: calc(8 * var(--u)); padding: calc(5 * var(--u)) calc(16 * var(--u)); border-radius: 99px; background: var(--velvet-1); color: var(--gold-1); font-size: calc(18 * var(--u)); font-weight: 600; }
+  .ticket .go svg { width: calc(20 * var(--u)); height: calc(20 * var(--u)); fill: var(--wa); }
+  .ticket .stub {
+    width: calc(118 * var(--u)); flex: none; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border-inline-start: calc(3 * var(--u)) dashed rgba(29, 9, 64, .45);
+  }
+  .ticket .stub small { font-size: calc(15 * var(--u)); font-weight: 600; line-height: 1.1; }
+  .ticket .stub b { font-family: var(--poster); font-weight: 700; font-size: calc(70 * var(--u)); line-height: .85; }
+  .ticket .stub b em { font-style: normal; font-size: .5em; }
+  .ticket .stub s { font-size: calc(16 * var(--u)); font-weight: 500; opacity: .7; }
+
+  .stamp {
+    position: absolute; z-index: 7; top: calc(12 * var(--u)); left: 50%; transform: translateX(-50%) rotate(-4deg);
+    font-family: var(--poster); font-weight: 700; font-size: calc(30 * var(--u)); letter-spacing: calc(2 * var(--u));
+    color: #ff5a8a; padding: calc(2 * var(--u)) calc(16 * var(--u));
+    border: calc(3 * var(--u)) solid #ff5a8a; border-radius: calc(8 * var(--u));
+    background: rgba(14, 4, 32, .85);
+    white-space: nowrap;
+  }
+  .tickets-wrap { position: relative; }
+
+  /* ---------- FOOTER ---------- */
   .foot {
-    position: relative; z-index: 2; flex: none; height: calc(96 * var(--u)); border-radius: 0 0 calc(28 * var(--u)) calc(28 * var(--u));
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 calc(56 * var(--u));
-    background: rgba(8, 3, 20, .55);
-    border-top: calc(1.5 * var(--u)) solid rgba(205, 184, 245, .15);
+    position: relative; z-index: 6; flex: none; height: calc(110 * var(--u));
+    display: flex; align-items: center; justify-content: space-between; padding: 0 calc(130 * var(--u));
   }
   .cta {
     display: inline-flex; align-items: center; gap: calc(14 * var(--u));
-    padding: calc(12 * var(--u)) calc(28 * var(--u)) calc(12 * var(--u)) calc(14 * var(--u));
-    border-radius: 99px;
-    background: var(--paper); color: var(--ink-800);
-    font-size: calc(26 * var(--u)); font-weight: 800;
-    transition: transform .2s ease;
+    padding: calc(10 * var(--u)) calc(14 * var(--u)) calc(10 * var(--u)) calc(30 * var(--u));
+    border-radius: 99px; background: var(--wa); color: #05301a;
+    font-size: calc(26 * var(--u)); font-weight: 700;
+    box-shadow: 0 0 0 calc(5 * var(--u)) rgba(37, 211, 102, .25), 0 calc(10 * var(--u)) calc(24 * var(--u)) rgba(0, 0, 0, .45);
+    animation: breathe 2.4s ease-in-out infinite;
   }
-  .cta:hover, .cta:focus-visible { transform: scale(1.03); outline: none; }
-  .cta .num { font-weight: 900; color: var(--plum); direction: ltr; letter-spacing: calc(.5 * var(--u)); }
-  .cta .wa { width: calc(48 * var(--u)); height: calc(48 * var(--u)); border-radius: 50%; background: var(--wa); display: grid; place-items: center; order: 3; }
-  .cta .wa svg { width: calc(28 * var(--u)); height: calc(28 * var(--u)); fill: #fff; }
-  .social { display: flex; gap: calc(14 * var(--u)); }
+  @keyframes breathe { 50% { box-shadow: 0 0 0 calc(12 * var(--u)) rgba(37, 211, 102, 0), 0 calc(10 * var(--u)) calc(24 * var(--u)) rgba(0, 0, 0, .45); } }
+  .export .cta { animation: none; }
+  .cta .ic { width: calc(46 * var(--u)); height: calc(46 * var(--u)); border-radius: 50%; background: #fff; display: grid; place-items: center; }
+  .cta .ic svg { width: calc(28 * var(--u)); height: calc(28 * var(--u)); fill: #1fb257; }
+  .cta .num { direction: ltr; font-weight: 700; color: #fff; text-shadow: 0 1px 0 rgba(0, 0, 0, .25); }
+  .social { display: flex; gap: calc(12 * var(--u)); }
   .social a {
-    width: calc(52 * var(--u)); height: calc(52 * var(--u)); border-radius: 50%;
-    display: grid; place-items: center;
-    border: calc(1.5 * var(--u)) solid rgba(205, 184, 245, .4);
-    color: var(--lav-200);
-    transition: background .2s ease, color .2s ease, border-color .2s ease;
+    width: calc(50 * var(--u)); height: calc(50 * var(--u)); border-radius: 50%; display: grid; place-items: center;
+    border: calc(1.5 * var(--u)) solid rgba(247, 207, 93, .55); color: var(--gold-1);
+    transition: background .2s, color .2s;
   }
-  .social a:hover, .social a:focus-visible { background: var(--gold-2); color: var(--ink-800); border-color: var(--gold-2); outline: none; }
+  .social a:hover, .social a:focus-visible { background: var(--gold-2); color: var(--velvet-1); outline: none; }
   .social svg { width: calc(24 * var(--u)); height: calc(24 * var(--u)); }
   .social a[data-empty] { opacity: .45; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .beam, .confetti .bit, .cta { animation: none; }
+    .hook .critic path { animation: none; stroke-dashoffset: 0; }
+    .hook .answer { animation: none; transform: rotate(-8deg); }
+  }
 </style>
 </head>
 <body>
@@ -223,65 +267,80 @@
 <main class="stage">
   <article class="poster" aria-label="זורקת ת'שכל – סדנת תיאטרון ואילתור לנשים">
 
-    <div class="hero">
-      <img src="assets/hero.jpg" alt="ארבע נשים צוחקות ומשחקות בסדנת תיאטרון">
-    </div>
+    <div class="beam"></div>
+    <div class="floor"></div>
+    <div class="curtain r"></div>
+    <div class="curtain l"></div>
+    <div class="valance"></div>
+    <svg class="confetti" viewBox="0 0 1080 1350" preserveAspectRatio="none" aria-hidden="true"></svg>
+
     <span class="bsd">בס"ד</span>
+    <p class="eyebrow">סדנת תיאטרון ואילתור <b>·</b> לנשים בלבד</p>
+    <h1 class="brand">זורקת ת'שכל</h1>
+    <div class="women"><img src="assets/women-cutout.png" alt="ארבע נשים צוחקות ומשחקות בסדנה"></div>
 
-    <div class="sticker"><div><small>בהרשמה מוקדמת</small><b>97<em>₪</em></b><s>במקום 120 ₪</s></div></div>
+    <div class="note you">זאת יכולה<br>להיות את!
+      <svg viewBox="0 0 80 70"><path d="M6 64 C 20 30, 40 16, 72 8"/><path d="M58 2 L 73 8 L 62 20"/></svg>
+    </div>
 
-    <figure class="bubble">
+    <figure class="quote">
       <p>"גיליתי שזה כיף להתפדח, שזה מעיר את החיות"</p>
-      <span>— אפרת, משתתפת בסדנה</span>
+      <span>— אפרת, משתתפת</span>
     </figure>
 
-    <section class="body">
-      <h1 class="brand">זורקת ת'שכל</h1>
-      <p class="eyebrow">סדנת תיאטרון ואילתור <i></i> לנשים בלבד</p>
+    <section class="content">
+      <div class="hook">
+        <span class="critic">מה יגידו?
+          <svg viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true"><path d="M6 62 C 70 40, 120 70, 190 46 S 320 30, 394 52 M 20 80 C 120 58, 260 74, 380 36"/></svg>
+        </span>
+        <span class="answer">שיגידו!</span>
+      </div>
+      <p class="sub">שעה וחצי של משחק, צחוק ותנועה שבהן הביקורת העצמית<br><b>מקבלת ערב חופש – במרחב נשי ובטוח.</b></p>
+      <ul class="nots">
+        <li>בלי ניסיון</li>
+        <li>בלי קהל</li>
+        <li>בלי שיפוטיות</li>
+      </ul>
 
-      <h2 class="headline">
-        <span class="soft">פחות לחשוב איך זה נראה.</span><br>
-        יותר להרגיש <span class="pop">כמה זה משחרר.</span>
-      </h2>
-      <p class="sub">ערב אחד של משחק, צחוק ותנועה עם נשים כמוך –<br><b>במרחב נשי ובטוח, שבו מותר לטעות ואף אחת לא שופטת.</b></p>
-
-      <div class="host">
+      <div class="credit">
         <img src="assets/elinor.jpg" alt="אלינור פור שלום">
-        <div class="who">
-          <small>בהנחיית</small>
+        <div>
+          <small>בימוי והנחיה</small>
           <strong>אלינור פור שלום</strong>
-          <span>במאית · שחקנית · מנחת קבוצות<br>20 שנות ניסיון מקצועי</span>
+          <span>במאית · שחקנית · מנחת קבוצות · 20 שנות ניסיון</span>
         </div>
-        <ul class="promises">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="#f6cf63" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" stroke-opacity=".35"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>לא צריך שום ניסיון</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="#f6cf63" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" stroke-opacity=".35"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>בלי במה ובלי קהל</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="#f6cf63" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" stroke-opacity=".35"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>קבוצה קטנה ואינטימית</li>
-        </ul>
       </div>
 
-      <p class="pick"><i></i>מספר המקומות מוגבל · בחרי תאריך ושמרי מקום</p>
-      <div class="dates">
-        <a class="date" data-wa="פתח תקווה (יום ג׳ 24.11)" href="#" target="_blank" rel="noopener">
-          <span class="city"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>פתח תקווה</span>
-          <span class="when">יום ג׳ · 24.11</span>
-          <span class="time">20:30 – 22:00</span>
-          <span class="go"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>שמרי לי מקום</span>
-        </a>
-        <a class="date" data-wa="ירושלים (יום ה׳ 17.12)" href="#" target="_blank" rel="noopener">
-          <span class="city"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>ירושלים</span>
-          <span class="when">יום ה׳ · 17.12</span>
-          <span class="time">20:00 – 21:30</span>
-          <span class="go"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>שמרי לי מקום</span>
-        </a>
+      <div class="tickets-wrap">
+        <span class="stamp">מספר המקומות מוגבל</span>
+        <div class="tickets">
+          <a class="ticket" data-wa="פתח תקווה (יום ג׳ 24.11)" href="#" target="_blank" rel="noopener">
+            <span class="main">
+              <span class="city">פתח תקווה · יום ג׳</span>
+              <span class="when">24.11</span>
+              <span class="time">20:30 – 22:00</span>
+              <span class="go"><svg><use href="#i-wa"/></svg>שמרי לי כרטיס</span>
+            </span>
+            <span class="stub"><small>בהרשמה<br>מוקדמת</small><b>97<em>₪</em></b><s>120 ₪</s></span>
+          </a>
+          <a class="ticket" data-wa="ירושלים (יום ה׳ 17.12)" href="#" target="_blank" rel="noopener">
+            <span class="main">
+              <span class="city">ירושלים · יום ה׳</span>
+              <span class="when">17.12</span>
+              <span class="time">20:00 – 21:30</span>
+              <span class="go"><svg><use href="#i-wa"/></svg>שמרי לי כרטיס</span>
+            </span>
+            <span class="stub"><small>בהרשמה<br>מוקדמת</small><b>97<em>₪</em></b><s>120 ₪</s></span>
+          </a>
+        </div>
       </div>
-
     </section>
 
     <footer class="foot">
       <a class="cta" data-wa="" href="#" target="_blank" rel="noopener">
+        <span class="ic"><svg><use href="#i-wa"/></svg></span>
         <span>שלחי הודעה ושמרי מקום</span>
         <span class="num">050-9027969</span>
-        <span class="wa"><svg viewBox="0 0 24 24"><use href="#i-wa"/></svg></span>
       </a>
       <nav class="social" aria-label="אלינור ברשתות">
         <a data-link="website" href="#" target="_blank" rel="noopener" aria-label="אתר"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.6 3.9 5.8 3.9 9.5s-1.3 6.9-3.9 9.5c-2.6-2.6-3.9-5.8-3.9-9.5S9.4 5.1 12 2.5z"/></svg></a>
@@ -317,6 +376,28 @@
     else if (a.dataset.link === "youtube") a.remove();
     else { a.setAttribute("data-empty", ""); a.removeAttribute("target"); }
   });
+
+  // Gold confetti "thrown" into the spotlight; seeded so every render matches.
+  (function confetti() {
+    const svg = document.querySelector(".confetti");
+    let s = 7;
+    const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+    const golds = ["#fff3c4", "#f7cf5d", "#d6952a", "#ffffff"];
+    let out = "";
+    for (let i = 0; i < 46; i++) {
+      // keep the band where the hook and tickets sit clear
+      const x = 130 + rnd() * 820, y = 50 + rnd() * 560;
+      const c = golds[Math.floor(rnd() * golds.length)], r = rnd() * 360, d = (rnd() * 3).toFixed(2);
+      const k = rnd();
+      const shape = k < .4
+        ? `<rect x="${x}" y="${y}" width="${6 + rnd() * 8}" height="${3 + rnd() * 4}" rx="1.5" fill="${c}"/>`
+        : k < .75
+          ? `<circle cx="${x}" cy="${y}" r="${1.5 + rnd() * 3}" fill="${c}"/>`
+          : `<path d="M${x} ${y - 9}L${x + 2.2} ${y - 2.2}L${x + 9} ${y}L${x + 2.2} ${y + 2.2}L${x} ${y + 9}L${x - 2.2} ${y + 2.2}L${x - 9} ${y}L${x - 2.2} ${y - 2.2}Z" fill="${c}"/>`;
+      out += `<g class="bit" style="animation-delay:-${d}s;opacity:${(.45 + rnd() * .55).toFixed(2)}"><g transform="rotate(${r.toFixed(0)} ${x.toFixed(0)} ${y.toFixed(0)})">${shape}</g></g>`;
+    }
+    svg.innerHTML = out;
+  })();
 
   if (new URLSearchParams(location.search).has("export")) document.documentElement.classList.add("export");
 </script>
